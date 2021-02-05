@@ -1,23 +1,30 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv').config()
-var pgp = require('pg-promise')(/* options */)
+
+//connecting to DB
 const { Client } = require('pg');
 
 const client = new Client({
-  connectionString: process.env.DBCONNECT,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 });
 
-client.connect(await ()=>{
-  console.log('connected')
+client.connect();
+
+client.query('SELECT * FROM clients;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row))
+  }
+  client.end();
 });
 
 
 
-
+//whatever
 const form = require('./routes/form')
 
 const port = 3000;
