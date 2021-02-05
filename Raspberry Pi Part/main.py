@@ -6,7 +6,7 @@ DB = psycopg2.connect(DATABASE_URL, sslmode='require').cursor()
 def collectFromDB(entredPin):
     DB.execute("SELECT * FROM clients WHERE pin = " + str(entredPin) + ";")
     collected = DB.fetchone()
-    if collected == "None":
+    if collected != "None":
         output = {
             "id": collected[8],
             "name": collected[0],
@@ -23,11 +23,9 @@ def collectFromDB(entredPin):
     return output
 
 pin = input()
-print(type(int(pin)))
-print(collectFromDB(int(pin)))
 
-# if collectFromDB(int(pin)) != "none":
-#     print(collectFromDB(pin)["name"])
-#     print(True)
-# else:
-#     print(False)
+if collectFromDB(int(pin)) != "none":
+    print(collectFromDB(pin)["name"])
+    print(True)
+else:
+    print(False)
