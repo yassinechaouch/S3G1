@@ -1,18 +1,8 @@
 const router = require('express').Router()
-var gpc = require('generate-pincode')
+const form = require('../controllers/formValid')
 
-let users = [
-    {
-        name : "",
-        surname : "",
-        email : ""
-    }
-]
+router.get('/form', (req,res)=> res.send('waiting for post'))
 
-router.post('/form', (req, res)=>{
-    users.push(req.body)
-    users[1].pin = gpc(6)
-    res.send(users[1])
-})
+router.post('/form', form)
 
 module.exports = router
