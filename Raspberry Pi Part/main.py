@@ -4,10 +4,10 @@ led = 10
 sensor = 8
 GPIO.setup(sensor, GPIO.IN)
 GPIO.setup(led, GPIO.OUT)
-
-if GPIO.input(sensor):
-    print('Input was HIGH')
-    GPIO.output(led, GPIO.HIGH)
-else:
-    print('Input was LOW')
-    GPIO.output(led, GPIO.LOW)
+while True:
+    if GPIO.input(sensor):
+        print('Input was HIGH')
+        GPIO.output(led, GPIO.HIGH)
+    else:
+        print('Input was LOW')
+        GPIO.output(led, GPIO.LOW)
