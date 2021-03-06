@@ -7,8 +7,10 @@ DB = psycopg2.connect(DATABASE_URL, sslmode='require').cursor()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-led = 3
-GPIO.setup(led, GPIO.OUT)
+ledGreen = 5
+GPIO.setup(ledGreen, GPIO.OUT)
+ledRed = 3
+GPIO.setup(ledRed, GPIO.OUT)
 
 def collectFromDB(entredPin):
     DB.execute("SELECT * FROM clients WHERE pin = " + str(entredPin) + ";")
@@ -30,13 +32,14 @@ def collectFromDB(entredPin):
     return output
 
 while True:
+    GPIO.output(ledRed, GPIO.HIGH)
     pin = input()
-
     if collectFromDB(int(pin)) != "none":
+        GPIO.output(ledRed, GPIO.LOW)
         print(collectFromDB(pin)["name"])
-        GPIO.output(led, GPIO.HIGH)
+        GPIO.output(ledGreen, GPIO.HIGH)
         sleep(5)
-        GPIO.output(led, GPIO.LOW)
+        GPIO.output(ledGreen, GPIO.LOW)
         print(True)
     else:
         print(False)
