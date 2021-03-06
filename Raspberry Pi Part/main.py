@@ -1,16 +1,14 @@
 import psycopg2
 import RPi.GPIO as GPIO
-import time
+from time import sleep
 DATABASE_URL = "postgres://ddrwyxdrclgapj:2d618ce3846acfe8048a05384a5242e377ee04d576efde709256c18f3291a323@ec2-34-248-148-63.eu-west-1.compute.amazonaws.com:5432/d83pdd4puormrb"
 DB = psycopg2.connect(DATABASE_URL, sslmode='require').cursor()
 
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-servo = 33
-GPIO.setup(servo, GPIO.OUT)
-pwm = GPIO.PWM(servo, 50)
-pwm.start(0)
+led = 3
+GPIO.setup(led, GPIO.OUT)
 
 def collectFromDB(entredPin):
     DB.execute("SELECT * FROM clients WHERE pin = " + str(entredPin) + ";")
@@ -31,24 +29,14 @@ def collectFromDB(entredPin):
         output = "none"
     return output
 
-def setAngle(angle):
-    duty = angle / 18 + 2
-    GPIO.output(servo, True)
-    pwm.ChangeDutyCycle(duty)
-    time.sleep(1)
-    GPIO.output(servo, False)
-    pwm.ChangeDutyCycle(duty)
-    
-    
-pin = input()
+while True:
+    pin = input()
 
-if collectFromDB(int(pin)) != "none":
-    print(collectFromDB(pin)["name"])
-    setAngle(10)
-    print(True)
-else:
-    print(False)
-
-pwm.stop()
-GPIO.cleanup()
-    
+    if collectFromDB(int(pin)) != "none":
+        print(collectFromDB(pin)["name"])
+        GPIO.output(led, GPIO.HIGH)
+        sleep(5)
+        GPIO.output(led, GPIO.LOW)
+        print(True)
+    else:
+        print(False)
