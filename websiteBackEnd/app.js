@@ -3,21 +3,19 @@ const app = express();
 const dotenv = require('dotenv').config()
 const {connect} = require('./models/DBconnect')
 const morganBody = require('morgan-body')
+const form = require('./routes/form')
 
 morganBody(app);
 
 connect()
-
-//whatever
-const form = require('./routes/form')
 
 const port = 5000;
 
 app.use(express.json())
 app.use('/', form)
 
-app.post('/', (req, res)=>{
-  res.send(req.body)
+app.get('/', (req, res)=>{
+  res.send('here')
 })
 
 app.listen(port, () => {
