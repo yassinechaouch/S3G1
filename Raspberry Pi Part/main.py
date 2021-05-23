@@ -1,45 +1,86 @@
-import psycopg2
-import RPi.GPIO as GPIO
-from time import sleep
-DATABASE_URL = "postgres://ddrwyxdrclgapj:2d618ce3846acfe8048a05384a5242e377ee04d576efde709256c18f3291a323@ec2-34-248-148-63.eu-west-1.compute.amazonaws.com:5432/d83pdd4puormrb"
-DB = psycopg2.connect(DATABASE_URL, sslmode='require').cursor()
+import tkinter
+from tkinter import *
+
+from pg import *
+
+class main(object):
+    def __init__(self):
+        self.root = tkinter.Tk()
+        self.root.title("APP")
+        self.root.attributes("-fullscreen", True)
+        self.root.bind("<Escape>", quit)
+        self.root.bind("x", quit)
+
+        self.root.minsize(480, 360)
+        self.root.config(background="#f9f5ff")
+
+        self.box = Frame(self.root)
+        self.box.place(in_=self.root, anchor="c", relx=.5, rely=.5)
+        self.box.config(background="#f9f5ff")
+
+        self.text = Label(self.box, height=1, bg='#f9f5ff')
+        self.text.config(font=("Courier", 44))
+        self.text.grid(column=0)
+
+        self.frame = Frame(self.box, bg='#f9f5ff')
+        self.frame.grid()
+
+        self.nampad()
+        self.submit()
+        self.clear()
+
+        self.root.mainloop()
+
+    def nampad(self):
+        btn_list = [
+            '1', '2', '3',
+            '4', '5', '6',
+            '7', '8', '9',
+            "CLEAR", '0', "OK"]
+
+        r = 1
+        c = 0
+
+        def nampad_func(text):
+            if len(text) > 6:
+                return text[:-1]
+            else:
+                return text
+
+        for b in btn_list:
+            if b != "CLEAR" and b != "OK":
+                self.pads = Button(self.frame, text=b, width=15, heigh=4,
+                                   command=lambda button=b: self.text.config(
+                                       text=nampad_func(self.text.cget("text") + button))).grid(
+                    row=r, column=c)
+
+            c += 1
+            if c == 3:
+                c = 0
+                r += 1
+
+    def clear(self):
+        def button_func_clear():
+            self.text.config(text="")
+
+        self.clear_btn = Button(self.frame, text="CLEAR", width=15, heigh=4, command=button_func_clear).grid(row=4,
+                                                                                                             column=0)
+
+    def submit(self):
+        def button_func():
+            text_var = self.text.cget("text")
+            if  pinChecker(text_var):
+                self.text.config(text="Success")
+                rpiOpen()
+
+            else:
+                self.text.config(text="Fail")
+
+            self.text.after(1500, lambda : self.text.config(text=""))
+
+        self.submit_btn = Button(self.frame, text="OK", width=15, heigh=4, command=button_func).grid(row=4, column=2)
 
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-ledGreen = 5
-GPIO.setup(ledGreen, GPIO.OUT)
-ledRed = 3
-GPIO.setup(ledRed, GPIO.OUT)
-
-def collectFromDB(entredPin):
-    DB.execute("SELECT * FROM clients WHERE pin = " + str(entredPin) + ";")
-    collected = DB.fetchone()
-    if collected != "None":
-        output = {
-            "id": collected[8],
-            "name": collected[0],
-            "surname": collected[1],
-            "studentID": collected[2],
-            "DATE": collected[3],
-            "Time_IN": collected[4],
-            "Time_OUT": collected[5],
-            "pin": collected[6],
-            "email": collected[7]
-        }
-    else:
-        output = "none"
-    return output
-
-while True:
-    GPIO.output(ledRed, GPIO.HIGH)
-    pin = input()
-    if collectFromDB(int(pin)) != "none":
-        GPIO.output(ledRed, GPIO.LOW)
-        print(collectFromDB(pin)["name"])
-        GPIO.output(ledGreen, GPIO.HIGH)
-        sleep(5)
-        GPIO.output(ledGreen, GPIO.LOW)
-        print(True)
-    else:
-        print(False)
+if __name__ == '__main__':
+    # rpiInit()
+    main()
