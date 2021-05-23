@@ -1,4 +1,3 @@
-//connecting to DB
 const { Client } = require('pg');
 
 const client = new Client({
@@ -34,20 +33,26 @@ const validPin = (data) =>{
       console.error('pin err: ' + e.stack)
       return false
     })
+}//to fix -- the think you want to do is not happening
+
+async function getData(){
+  let { rows } = await client.query("SELECT * FROM clients")
+  data = rows
+  //console.log(data)
+  return data;
 }
 
-module.exports = { connect, post, validPin }
 
+// const getData = async () =>{
+//   let res = await client
+//     .query(`SELECT * FROM clients`)
+//     // .then(res =>{
+//     //   console.log(res.rows)
+//     // })
+//     // .catch(e=>{
+//     //   console.error('db error: ' + e.stack)
+//     // })
+//     return res.rows[0]
+// }
 
-
-// client.query('SELECT * FROM clients;', (err, res) => {
-//   if (err) throw err;
-//   for (let row of res.rows) {
-//     db = JSON.stringify(row)
-//   }
-//   client.end();
-// });
-
-
-
-
+module.exports = { connect, post, validPin, getData }

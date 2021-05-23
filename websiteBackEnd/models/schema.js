@@ -32,3 +32,5 @@ const schema = Joi.object({
 
 
 module.exports = schema
+
+// name / surname / email / student id / date / time in / time out / --pin
