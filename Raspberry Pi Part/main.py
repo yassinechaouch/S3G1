@@ -49,7 +49,7 @@ class main(object):
 
         for b in btn_list:
             if b != "CLEAR" and b != "OK":
-                self.pads = Button(self.frame, text=b, width=15, heigh=4,
+                self.pads = Button(self.frame, text=b, width=10, heigh=4,
                                    command=lambda button=b: self.text.config(
                                        text=nampad_func(self.text.cget("text") + button))).grid(
                     row=r, column=c)
@@ -63,7 +63,7 @@ class main(object):
         def button_func_clear():
             self.text.config(text="")
 
-        self.clear_btn = Button(self.frame, text="CLEAR", width=15, heigh=4, command=button_func_clear).grid(row=4,
+        self.clear_btn = Button(self.frame, text="CLEAR", width=10, heigh=4, command=button_func_clear).grid(row=4,
                                                                                                              column=0)
 
     def submit(self):
@@ -78,7 +78,7 @@ class main(object):
 
             self.text.after(1500, lambda : self.text.config(text=""))
 
-        self.submit_btn = Button(self.frame, text="OK", width=15, heigh=4, command=button_func).grid(row=4, column=2)
+        self.submit_btn = Button(self.frame, text="OK", width=10, heigh=4, command=button_func).grid(row=4, column=2)
 
 
 if __name__ == '__main__':

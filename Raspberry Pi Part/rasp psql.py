@@ -25,7 +25,7 @@ def collectFromDB(entredPin):
 pin = input()
 
 if collectFromDB(int(pin)) != "none":
-    print(collectFromDB(pin)["name"])
+    print(collectFromDB(pin))
     print(True)
 else:
     print(False)
