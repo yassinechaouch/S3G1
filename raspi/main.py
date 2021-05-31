@@ -1,7 +1,18 @@
 import tkinter
 from tkinter import *
-
+import RPi.GPIO as GPIO
 from pg import *
+
+ledGreen = 38
+ledRed = 40
+
+def rpiInit():
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(ledGreen, GPIO.OUT)
+    GPIO.setup(ledRed, GPIO.OUT)
+    GPIO.output(ledRed, GPIO.HIGH)
+    GPIO.output(ledGreen, GPIO.LOW)
 
 
 class main(object):
@@ -83,5 +94,5 @@ class main(object):
 
 
 if __name__ == '__main__':
-    # rpiInit()
+    rpiInit()
     main()

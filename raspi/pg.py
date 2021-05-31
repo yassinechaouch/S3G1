@@ -52,11 +52,7 @@ ledGreen = 5
 ledRed = 3
 
 
-# def rpiInit():
-#     GPIO.setwarnings(False)
-#     GPIO.setmode(GPIO.BOARD)
-#     GPIO.setup(ledGreen, GPIO.OUT)
-#     GPIO.setup(ledRed, GPIO.OUT)
+
 
 
 def rpiOpen():
