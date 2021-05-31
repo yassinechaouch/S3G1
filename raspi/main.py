@@ -88,7 +88,7 @@ class main(object):
             else:
                 self.text.config(text="Fail")
 
-            self.text.after(1500, lambda: self.text.config(text=""))
+            self.text.after(5000, lambda: self.text.config(text=""))
 
         self.submit_btn = Button(self.frame, text="OK", width=10, heigh=4, command=button_func).grid(row=4, column=2)
 
