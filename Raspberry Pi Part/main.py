@@ -3,6 +3,7 @@ from tkinter import *
 
 from pg import *
 
+
 class main(object):
     def __init__(self):
         self.root = tkinter.Tk()
@@ -11,7 +12,7 @@ class main(object):
         self.root.bind("<Escape>", quit)
         self.root.bind("x", quit)
 
-        self.root.minsize(480, 360)
+        self.root.minsize(320, 240)
         self.root.config(background="#f9f5ff")
 
         self.box = Frame(self.root)
@@ -69,14 +70,14 @@ class main(object):
     def submit(self):
         def button_func():
             text_var = self.text.cget("text")
-            if  pinChecker(text_var):
+            if pinChecker(text_var):
                 self.text.config(text="Success")
                 rpiOpen()
 
             else:
                 self.text.config(text="Fail")
 
-            self.text.after(1500, lambda : self.text.config(text=""))
+            self.text.after(1500, lambda: self.text.config(text=""))
 
         self.submit_btn = Button(self.frame, text="OK", width=10, heigh=4, command=button_func).grid(row=4, column=2)
 

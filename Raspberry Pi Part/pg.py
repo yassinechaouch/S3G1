@@ -46,4 +46,4 @@ ledRed = 3
 
 
 def rpiOpen():
-    subprocess.call("./test.py", shell=True)
+    subprocess.call("test.py", shell=True)
