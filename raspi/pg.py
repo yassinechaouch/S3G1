@@ -11,6 +11,7 @@ def ping():
     GPIO.output(ledGreen, GPIO.HIGH)
     sleep(5)
     GPIO.output(ledGreen, GPIO.LOW)
+    GPIO.output(ledRed, GPIO.HIGH)git
 
     # print("on")
     # sleep(5)
