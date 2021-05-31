@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="PostgreSQL -" uuid="30fc5c7a-a539-4031-b54e-5576c2e45636">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>postgres://ddrwyxdrclgapj:2d618ce3846acfe8048a05384a5242e377ee04d576efde709256c18f3291a323@ec2-34-248-148-63.eu-west-1.compute.amazonaws.com:5432/d83pdd4puormrb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - Heroku" uuid="fbfc7513-fce8-4156-a3a0-03511f2bc602">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-34-248-148-63.eu-west-1.compute.amazonaws.com:5432/d83pdd4puormrb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - jdbc:postgresql://ec2-34-248-148-63.eu-west-1.compute.amazonaws.com :5432/d83pdd4puormrb" uuid="d5f93a80-67c1-4b25-b643-a984c669ca8d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-34-248-148-63.eu-west-1.compute.amazonaws.com:5432/d83pdd4puormrb</jdbc-url>
+    </data-source>
+  </component>
+</project>
