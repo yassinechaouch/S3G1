@@ -4,8 +4,8 @@ import threading
 from time import sleep
 
 def ping():
-    ledGreen = 5
-    ledRed = 3
+    ledGreen = 38
+    ledRed = 40
 
     GPIO.output(ledRed, GPIO.LOW)
     GPIO.output(ledGreen, GPIO.HIGH)
