@@ -1,0 +1,98 @@
+$raisin-black: rgba(40, 38, 44, 1);
+$lavender-blue: rgba(212, 194, 252, 1);
+$magnolia: rgba(249, 245, 255, 1);
+$resolution-blue: rgba(20, 36, 138, 1);
+$celadon-blue: rgba(66, 129, 164, 1);
+.card-container {
+  height: 35rem;
+  width: 20rem;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 0 10px gray;
+  border-radius: 10px;
+  margin: 3rem;
+  display: grid;
+  grid-template-rows: 55% 10% 5% 20% 10%;
+  grid-template-areas: "img-section" "name-section" "title-section" "desc-section" "social-section";
+
+  &:hover {
+    box-shadow: 0 0 20px gray;
+  }
+
+  .img-card-section {
+    grid-area: img-section;
+    overflow: hidden;
+    position: relative;
+
+    .img-card-square {
+      background-color: white;
+      height: 25rem;
+      width: 10rem;
+      position: absolute;
+      transform: rotate(70deg);
+      top: 6rem;
+      left: 5rem;
+    }
+
+    .img-card-style {
+      height: 100%;
+      width: 20rem;
+    }
+  }
+  .name-card-section {
+    grid-area: name-section;
+    font-weight: 600;
+
+    font-size: 1.8rem;
+    padding-left: 50px;
+  }
+  .name-card-section1 {
+    grid-area: name-section;
+    font-weight: 600;
+    font-size: 1.8rem;
+    padding-left: 80px;
+  }
+
+  .title-card-section {
+    padding-left: 80px;
+    font-weight: 300;
+    padding-bottom: 2000px;
+    grid-area: title-section;
+    font-size: 1.2rem;
+    color: rgba(40, 38, 44, 1);
+  }
+
+  .desc-card-section {
+    grid-area: desc-section;
+    margin: 0.5rem 1.5rem;
+  }
+
+  .social-card-section {
+    grid-area: social-section;
+    margin: auto;
+
+    .social-card-style {
+      height: 2rem;
+      margin: 0 1rem;
+      transition: all 0.3s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .profile-img-card {
+    position: absolute;
+    height: 10rem;
+    width: 10rem;
+    box-shadow: 0 0 0 10px rgba(249, 245, 255, 1);
+    border-radius: 50%;
+    top: calc(50% - 10rem);
+    left: calc(50% - 5rem);
+  }
+}
+.body {
+  grid-row: inherit;
+}
