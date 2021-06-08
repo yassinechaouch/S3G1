@@ -54,7 +54,7 @@ class main(object):
         c = 0
 
         def nampad_func(text):
-            if len(text) > 6:
+            if len(text) > 4:
                 return text[:-1]
             else:
                 return text
@@ -88,11 +88,12 @@ class main(object):
             else:
                 self.text.config(text="Fail")
 
-            self.text.after(5000, lambda: self.text.config(text=""))
+            self.text.after(3000, lambda: self.text.config(text=""))
 
         self.submit_btn = Button(self.frame, text="OK", width=10, heigh=4, command=button_func).grid(row=4, column=2)
 
 
 if __name__ == '__main__':
+    log.basicConfig(filename='file.log')
     rpiInit()
     main()

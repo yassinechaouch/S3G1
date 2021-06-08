@@ -1,7 +1,10 @@
 import psycopg2
 import RPi.GPIO as GPIO
 import threading
-from time import sleep
+import time
+from datetime import datetime
+import logging as log
+
 
 def ping():
     ledGreen = 38
@@ -9,13 +12,14 @@ def ping():
 
     GPIO.output(ledRed, GPIO.LOW)
     GPIO.output(ledGreen, GPIO.HIGH)
-    sleep(5)
+    time.sleep(3)
     GPIO.output(ledGreen, GPIO.LOW)
     GPIO.output(ledRed, GPIO.HIGH)
 
     # print("on")
-    # sleep(5)
+    # time.sleep(5)
     # print("off")
+
 
 DATABASE_URL = "postgres://ddrwyxdrclgapj:2d618ce3846acfe8048a05384a5242e377ee04d576efde709256c18f3291a323@ec2-34-248-148-63.eu-west-1.compute.amazonaws.com:5432/d83pdd4puormrb"
 DB = psycopg2.connect(DATABASE_URL, sslmode='require').cursor()
@@ -42,17 +46,23 @@ def collectFromDB(entredPin):
 
 def pinChecker(pin):
     if collectFromDB(int(pin)) != "none":
-        print(collectFromDB(pin)["name"])
+        name = collectFromDB(pin)["name"]
+        print(name)
+        now = datetime.now()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        print('LOG: user ' + name + ' entred the space at  ' + dt_string)
+        log.getLogger().setLevel(log.INFO)
+        log.info('user ' + name + ' entred the space at  ' + dt_string)
         return True
     else:
+        now = datetime.now()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        log.warning('someone tried to get into the maker space at ' + dt_string)
         return False
 
 
 ledGreen = 5
 ledRed = 3
-
-
-
 
 
 def rpiOpen():
